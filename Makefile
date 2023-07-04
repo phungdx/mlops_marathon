@@ -5,10 +5,10 @@ teardown:
 
 # mlflow
 mlflow_up:
-	docker-compose -f deployment/mlflow/docker-compose.yml up -d
+	sudo docker-compose -f deployment/mlflow/docker-compose.yml up -d
 
 mlflow_down:
-	docker-compose -f deployment/mlflow/docker-compose.yml down
+	sudo docker-compose -f deployment/mlflow/docker-compose.yml down
 
 # predictor
 predictor_up:

@@ -52,8 +52,12 @@ class ModelTrainer:
 
         # evaluate
         test_x, test_y = RawDataProcessor.load_test_data(prob_config)
-        predictions = model.predict(test_x)
-        auc_score = roc_auc_score(test_y, predictions)
+        if objective.__contains__("binary"):
+            predictions = model.predict(test_x)
+            auc_score = roc_auc_score(test_y, predictions)
+        elif objective.__contains__("multi"):
+            predictions = model.predict_proba(test_x)
+            auc_score = roc_auc_score(test_y, predictions, multi_class='ovr')
         metrics = {"test_auc": auc_score}
         logging.info(f"metrics: {metrics}")
 
